@@ -1,5 +1,6 @@
 
 const URL = 'https://api.sheety.co/98765a5118133cb8a9af3f919a14164c/testSpreedsheet/sheet1'
+$('#thank-form').hide();
 $("#main-form").submit((event) => {
     event.preventDefault();
     var name = event.target.name.value;
@@ -16,13 +17,19 @@ $("#main-form").submit((event) => {
             }
         }
 
-        $.ajax(URL, {
-            type: 'POST',
-            contentType: 'application/json',
-            data: JSON.stringify(body)
-        }, () => {
-            console.log("success")
-        })
+        $.ajax(URL, 
+            {
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(body),
+                success:()=>{
+                    $("#main-form").hide();
+                    $('#thank-form').show();
+                }
+            }
+        )
+
+
 
     }
     else {
